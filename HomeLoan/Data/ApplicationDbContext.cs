@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeLoan.Data
 {
-    public class ApplicationDbContext:IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -12,5 +12,7 @@ namespace HomeLoan.Data
 
         }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<LoanApplication> LoanApplications { get; set; }
+
     }
 }

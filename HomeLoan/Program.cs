@@ -2,6 +2,7 @@ using HomeLoan.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HomeLoan.Services;
+using HomeLoan.Models;
 
 namespace HomeLoan
 {
@@ -35,7 +36,7 @@ namespace HomeLoan
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapRazorPages();
             app.MapControllerRoute(

@@ -4,6 +4,7 @@ using HomeLoan.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeLoan.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250425065404_AddedLoanApplnModel")]
+    partial class AddedLoanApplnModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace HomeLoan.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HomeLoan.Models.LoanApplication", b =>
+            modelBuilder.Entity("HomeLoan.Models.HomeLoan.Models.LoanApplication", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,9 +71,6 @@ namespace HomeLoan.Migrations
 
                     b.Property<string>("SalarySlipPath")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TenureYears")
@@ -319,7 +319,7 @@ namespace HomeLoan.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("HomeLoan.Models.LoanApplication", b =>
+            modelBuilder.Entity("HomeLoan.Models.HomeLoan.Models.LoanApplication", b =>
                 {
                     b.HasOne("HomeLoan.Models.ApplicationUser", "User")
                         .WithMany()

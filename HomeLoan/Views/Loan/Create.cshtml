@@ -1,0 +1,90 @@
+﻿@model HomeLoan.Models.LoanApplication;
+
+@{
+    ViewData["Title"] = "Apply for Home Loan";
+}
+
+<div class="container py-4">
+    <h2 class="mb-4 text-center">Home Loan Application Form</h2>
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+       
+
+        <!-- Income & Property Details -->
+        <h4 class="mt-4">Income and Property Details</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="EmploymentType" class="form-label"></label>
+                <select asp-for="EmploymentType" class="form-select">
+                    <option value="">Select Employment Type</option>
+                    <option>Salaried</option>
+                    <option>Self-employed</option>
+                </select>
+                <span asp-validation-for="EmploymentType" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="NetMonthlySalary" class="form-label"></label>
+                <input asp-for="NetMonthlySalary" class="form-control" />
+                <span asp-validation-for="NetMonthlySalary" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="PropertyLocation" class="form-label"></label>
+                <input asp-for="PropertyLocation" class="form-control" />
+                <span asp-validation-for="PropertyLocation" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="PropertyName" class="form-label"></label>
+                <input asp-for="PropertyName" class="form-control" />
+                <span asp-validation-for="PropertyName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="EstimatedCost" class="form-label"></label>
+                <input asp-for="EstimatedCost" class="form-control" />
+                <span asp-validation-for="EstimatedCost" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Loan Details -->
+        <h4 class="mt-4">Loan Details</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="LoanAmountRequested" class="form-label"></label>
+                <input asp-for="LoanAmountRequested" class="form-control" />
+                <span asp-validation-for="LoanAmountRequested" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="TenureYears" class="form-label"></label>
+                <input asp-for="TenureYears" class="form-control" />
+                <span asp-validation-for="TenureYears" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Document Uploads -->
+        <h4 class="mt-4">Upload Documents</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Upload Aadhar Card</label>
+                <input type="file" name="AadharFile"  class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Upload PAN Card</label>
+                <input type="file" name="PANFile"  class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Salary Slip</label>
+                <input type="file" name="SalarySlip" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">NOC / LOA</label>
+                <input type="file" name="NOCFile"  class="form-control" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mt-4">Submit Application</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
