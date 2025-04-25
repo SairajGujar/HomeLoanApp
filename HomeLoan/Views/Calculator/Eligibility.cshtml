@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Eligibility Calculator";
+}
+
+<div class="container py-4">
+    <h2 class="text-center mb-4">Loan Eligibility Calculator</h2>
+
+    <form method="post" asp-action="Eligibility">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Net Monthly Income (₹)</label>
+                <input type="number" name="MonthlyIncome" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Existing Monthly EMIs (if any)</label>
+                <input type="number" name="ExistingEMI" class="form-control" value="0" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Check Eligibility</button>
+    </form>
+
+    @if (ViewBag.EligibleAmount != null)
+    {
+        <div class="alert alert-success mt-4">
+            <h4>You may be eligible for a loan of up to: ₹@ViewBag.EligibleAmount</h4>
+        </div>
+    }
+</div>

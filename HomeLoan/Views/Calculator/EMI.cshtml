@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "EMI Calculator";
+}
+
+<div class="container py-4">
+    <h2 class="text-center mb-4">EMI Calculator</h2>
+
+    <form method="post" asp-action="EMI">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" name="LoanAmount" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Interest Rate (%)</label>
+                <input type="number" name="InterestRate" step="0.01" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Tenure (in Years)</label>
+                <input type="number" name="TenureYears" class="form-control" required />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate EMI</button>
+    </form>
+
+    @if (ViewBag.EMI != null)
+    {
+        <div class="alert alert-success mt-4">
+            <h4>Monthly EMI: ₹@ViewBag.EMI</h4>
+        </div>
+    }
+</div>
