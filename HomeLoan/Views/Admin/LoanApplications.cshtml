@@ -1,0 +1,55 @@
+﻿@model IEnumerable<HomeLoan.Models.LoanApplication>
+
+@{
+    ViewData["Title"] = "Manage Loan Applications";
+}
+
+<div class="container py-4">
+    <h2 class="mb-4 text-center">Loan Applications</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Property</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model)
+            {
+                <tr>
+                    <td>@app.Id</td>
+                    <td>@app.User.FullName (@app.User.Email)</td>
+                    <td>@app.PropertyName</td>
+                    <td>₹@app.LoanAmountRequested</td>
+                    <td>@app.Status</td>
+                    <td>@app.ApplicationDate.ToString("dd MMM yyyy")</td>
+                    <td>
+                        <form method="post" asp-action="UpdateStatus" asp-controller="Admin" style="display:inline;">
+                            <input type="hidden" name="id" value="@app.Id" />
+                            <input type="hidden" name="status" value="Verified" />
+                            <button class="btn btn-outline-primary btn-sm">Verify</button>
+                        </form>
+                        <form method="post" asp-action="UpdateStatus" asp-controller="Admin" style="display:inline;">
+                            <input type="hidden" name="id" value="@app.Id" />
+                            <input type="hidden" name="status" value="Approved" />
+                            <button class="btn btn-outline-success btn-sm">Approve</button>
+                        </form>
+                        <form method="post" asp-action="UpdateStatus" asp-controller="Admin" style="display:inline;">
+                            <input type="hidden" name="id" value="@app.Id" />
+                            <input type="hidden" name="status" value="Rejected" />
+                            <button class="btn btn-outline-danger btn-sm">Reject</button>
+                        </form>
+                        <a class="btn btn-outline-info btn-sm me-1" href="@Url.Action("ViewApplication", "Admin", new { id = app.Id })">View</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,74 @@
+﻿@model HomeLoan.Models.LoanApplication
+
+@{
+    ViewData["Title"] = "Loan Application Details";
+}
+
+<div class="container py-4">
+    <h2 class="mb-4">Loan Application Details (ID: @Model.Id)</h2>
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">Applicant Info</div>
+        <div class="card-body">
+            <p><strong>Name:</strong> @Model.User.FullName</p>
+            <p><strong>Email:</strong> @Model.User.Email</p>
+            <p><strong>DOB:</strong> @Model.User.DateOfBirth.ToString("dd MMM yyyy")</p>
+            <p><strong>Aadhar:</strong> @Model.User.AadharNumber</p>
+            <p><strong>PAN:</strong> @Model.User.PANNumber</p>
+            <p><strong>Gender:</strong> @Model.User.Gender</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">Loan & Property Details</div>
+        <div class="card-body">
+            <p><strong>Property:</strong> @Model.PropertyName, @Model.PropertyLocation</p>
+            <p><strong>Estimated Cost:</strong> ₹@Model.EstimatedCost</p>
+            <p><strong>Loan Requested:</strong> ₹@Model.LoanAmountRequested</p>
+            <p><strong>Tenure:</strong> @Model.TenureYears years</p>
+            <p><strong>Employment:</strong> @Model.EmploymentType</p>
+            <p><strong>Monthly Income:</strong> ₹@Model.NetMonthlySalary</p>
+            <p><strong>Status:</strong> <span class="fw-bold">@Model.Status</span></p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">Uploaded Documents</div>
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(Model.AadharFilePath))
+            {
+                <p><strong>Aadhar:</strong> <a href="@Model.AadharFilePath" target="_blank">View</a></p>
+            }
+            @if (!string.IsNullOrEmpty(Model.PANFilePath))
+            {
+                <p><strong>PAN:</strong> <a href="@Model.PANFilePath" target="_blank">View</a></p>
+            }
+            @if (!string.IsNullOrEmpty(Model.SalarySlipPath))
+            {
+                <p><strong>Salary Slip:</strong> <a href="@Model.SalarySlipPath" target="_blank">View</a></p>
+            }
+            @if (!string.IsNullOrEmpty(Model.NOCFilePath))
+            {
+                <p><strong>NOC / LOA:</strong> <a href="@Model.NOCFilePath" target="_blank">View</a></p>
+            }
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <form method="post" asp-action="UpdateStatus" asp-controller="Admin">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="status" value="Verified" />
+            <button class="btn btn-outline-primary">Verify</button>
+        </form>
+        <form method="post" asp-action="UpdateStatus" asp-controller="Admin">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="status" value="Approved" />
+            <button class="btn btn-outline-success">Approve</button>
+        </form>
+        <form method="post" asp-action="UpdateStatus" asp-controller="Admin">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="status" value="Rejected" />
+            <button class="btn btn-outline-danger">Reject</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<HomeLoan.Models.LoanApplication>
+
+@{
+    ViewData["Title"] = "Track Your Loan Applications";
+}
+
+<div class="container py-4">
+    <h2 class="text-center mb-4">Your Loan Applications</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            You haven't applied for any loan yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Application ID</th>
+                    <th>Property</th>
+                    <th>Loan Amount</th>
+                    <th>Status</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var app in Model)
+                {
+                    <tr>
+                        <td>@app.Id</td>
+                        <td>@app.PropertyName (@app.PropertyLocation)</td>
+                        <td>₹@app.LoanAmountRequested</td>
+                        <td>@app.Status</td>
+
+                        <td>@app.ApplicationDate.ToString("dd MMM yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

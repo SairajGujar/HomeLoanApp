@@ -1,12 +1,15 @@
 ﻿using HomeLoan.Data;
 using HomeLoan.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
 namespace HomeLoan.Controllers
 {
+    [Authorize(Roles = "User")]
     public class LoanController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -64,6 +67,18 @@ namespace HomeLoan.Controllers
                 file.CopyTo(stream);
             }
             return "/uploads/" + fileName;
+        }
+
+        public async Task<IActionResult> Track()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var applications = _db.LoanApplications
+                .Where(a => a.UserId == user.Id)
+                .OrderByDescending(a => a.ApplicationDate)
+                .ToList();
+
+            return View(applications);
         }
 
 
