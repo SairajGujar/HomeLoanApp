@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container py-4">
+    <h2 class="text-center mb-4">Welcome Admin</h2>
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Applications</h5>
+                    <p class="card-text">@ViewBag.PendingCount</p>
+                    <a href="/Admin/LoanApplications" class="btn btn-outline-primary">View Pending</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Approved Loans</h5>
+                    <p class="card-text">@ViewBag.ApprovedCount</p>
+                    <a href="/Admin/LoanApplications" class="btn btn-outline-success">View Approved</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Rejected Applications</h5>
+                    <p class="card-text">@ViewBag.RejectedCount</p>
+                    <a href="/Admin/LoanApplications" class="btn btn-outline-danger">View Rejected</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

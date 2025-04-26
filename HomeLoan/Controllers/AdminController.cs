@@ -47,5 +47,15 @@ namespace HomeLoan.Controllers
             return View(loan);
         }
 
+        public IActionResult Dashboard()
+        {
+            ViewBag.PendingCount = _db.LoanApplications.Count(l => l.Status == "Pending");
+            ViewBag.ApprovedCount = _db.LoanApplications.Count(l => l.Status == "Approved");
+            ViewBag.RejectedCount = _db.LoanApplications.Count(l => l.Status == "Rejected");
+
+            return View();
+        }
+
+
     }
 }
